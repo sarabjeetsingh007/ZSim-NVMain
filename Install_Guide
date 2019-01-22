@@ -1,0 +1,17 @@
+#Written by sarabjeet.singh@ashoka.edu.in
+#IMPORTANT: Due to Pin and Kernel dependency issues, ZSim+NVMain only runs in Ubuntu 12
+
+1) Run the install.sh script, and add all the environment variables to ~/.bashrc
+
+2) Make Pin:
+2a) $PINPATH/source/tools/
+2b) make -j16
+2c) For Pin injection mode, run this command as root: echo 0 > /proc/sys/kernel/yama/ptrace_scope
+
+3) FIX: In $NVMAINPATH/SConscript, comment out line "from gem5_scons import Transform"
+
+3) Build NVMain (at $NVMAINPATH): scons -j16
+
+4) Build ZSim (at $ZSIMPATH): scons -j16
+
+5) Test Run: ./build/opt/zsim test/simple.cfg
